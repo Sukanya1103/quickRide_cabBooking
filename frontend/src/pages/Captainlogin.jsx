@@ -62,7 +62,7 @@ const Captainlogin = () => {
         <div className="flex justify-center mb-8">
           <img
             className="w-24 drop-shadow-lg"
-            src="https://www.svgrepo.com/show/505031/uber-driver.svg"
+            src="./src/assets/QuickRide_logo_1.jpeg"
             alt="Captain Logo"
           />
         </div>

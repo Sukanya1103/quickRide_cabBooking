@@ -184,12 +184,18 @@ const CaptainHome = () => {
         // return () => clearInterval(locationInterval)
     }, [])
 
-    socket.on('new-ride', (data) => {
+    socket.on('new-ride', (ride) => {
+  if (
+    ride.driverGenderPreference === 'female' &&
+    captain.gender !== 'female'
+  ) {
+    return
+  }
 
-        setRide(data)
-        setRidePopupPanel(true)
+  setRide(ride)
+  setRidePopupPanel(true)
+})
 
-    })
 
     async function confirmRide() {
 
@@ -240,7 +246,7 @@ const CaptainHome = () => {
             {/* TOP NAV — modern glass style */}
             <div className='fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-5xl bg-white/40 backdrop-blur-md border border-white/20 rounded-full px-6 py-3 flex items-center justify-between shadow-lg'>
                 <div className="flex items-center gap-4">
-                    <img className='w-14' src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
+                    <img className='w-14' src="./src/assets/QuickRide_logo_1.jpeg" alt="" />
                     <div>
                         <div className="text-sm text-orange-700">Welcome,</div>
                         <div className="text-base font-semibold">{captain?.fullname?.firstname || 'Captain'}</div>

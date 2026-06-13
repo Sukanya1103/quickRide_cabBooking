@@ -62,7 +62,7 @@ const UserLogin = () => {
         <div className="flex justify-center mb-8">
           <img
             className="w-24 drop-shadow-lg"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYQy-OIkA6In0fTvVwZADPmFFibjmszu2A0g&s"
+            src="./src/assets/QuickRide_logo_1.jpeg"
             alt="QuickRide Logo"
           />
         </div>

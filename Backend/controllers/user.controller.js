@@ -10,7 +10,7 @@ module.exports.registerUser = async (req, res, next) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { fullname, email, password } = req.body;
+    const { fullname, email, password, gender } = req.body;
 
     const isUserAlready = await userModel.findOne({ email });
 
@@ -23,6 +23,7 @@ module.exports.registerUser = async (req, res, next) => {
     const user = await userService.createUser({
         firstname: fullname.firstname,
         lastname: fullname.lastname,
+        gender,
         email,
         password: hashedPassword
     });

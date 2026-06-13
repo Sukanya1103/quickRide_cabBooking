@@ -24,6 +24,7 @@ const Home = () => {
     const waitingForDriverRef = useRef(null)
     const panelRef = useRef(null)
     const panelCloseRef = useRef(null)
+    const [driverGenderPreference, setDriverGenderPreference] = useState('male')
     const [ vehiclePanel, setVehiclePanel ] = useState(false)
     const [ confirmRidePanel, setConfirmRidePanel ] = useState(false)
     const [ vehicleFound, setVehicleFound ] = useState(false)
@@ -61,6 +62,13 @@ const Home = () => {
         setWaitingForDriver(false)
         navigate('/riding', { state: { ride } }) // Updated navigate to include ride data
     })
+
+    useEffect(() => {
+  if (user?.gender === 'female') {
+    setDriverGenderPreference('any')
+  }
+}, [user])
+
 
 
     const handlePickupChange = async (e) => {
@@ -189,19 +197,25 @@ const Home = () => {
 
     }
 
-    async function createRide() {
-        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/create`, {
-            pickup,
-            destination,
-            vehicleType
-        }, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-
-
+    const createRide = async ({ driverGenderPreference }) => {
+  await axios.post(
+    `${import.meta.env.VITE_BASE_URL}/rides/create`,
+    {
+      pickup,
+      destination,
+      vehicleType,
+      driverGenderPreference 
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
     }
+  )
+}
+
+
+    
 
     return (
         <div className='h-screen relative overflow-hidden'>
@@ -261,6 +275,16 @@ const Home = () => {
                         activeField={activeField}
                     />
                 </div>
+            </div>
+            <div>
+                {user.gender === 'female' && (
+ <select value={driverGenderPreference} onChange={e => setDriverGenderPreference(e.target.value)}>
+    <option value="">No Preference</option>
+    <option value="female">Female Driver</option>
+    <option value="male">Male Driver</option>
+  </select>
+)}
+
             </div>
             <div ref={vehiclePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12'>
                 <VehiclePanel

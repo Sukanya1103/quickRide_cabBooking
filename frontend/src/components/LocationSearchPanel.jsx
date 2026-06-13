@@ -10,6 +10,7 @@ const LocationSearchPanel = ({ suggestions, setVehiclePanel, setPanelOpen, setPi
         }
         // setVehiclePanel(true)
         // setPanelOpen(false)
+        
     }
 
     return (
@@ -24,6 +25,8 @@ const LocationSearchPanel = ({ suggestions, setVehiclePanel, setPanelOpen, setPi
                 ))
             }
         </div>
+
+        
     )
 }
 

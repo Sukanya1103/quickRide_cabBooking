@@ -10,6 +10,7 @@ const UserSignup = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [gender, setGender] = useState("");
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserDataContext);
 
@@ -19,6 +20,7 @@ const UserSignup = () => {
       fullname: { firstname: firstName, lastname: lastName },
       email,
       password,
+      gender
     };
 
     const response = await axios.post(
@@ -37,6 +39,7 @@ const UserSignup = () => {
     setFirstName("");
     setLastName("");
     setPassword("");
+    setGender("");
   };
 
   return (
@@ -61,13 +64,13 @@ const UserSignup = () => {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="bg-white/10 backdrop-blur-lg border border-white/10 rounded-3xl shadow-2xl p-12 w-full max-w-2xl mx-auto hover:shadow-green-400/10 transition-all duration-300"
+        className="bg-white/10 backdrop-blur-lg border border-white/10 rounded-4xl shadow-2xl p-12 w-full max-w-2xl mx-auto hover:shadow-green-400/10 transition-all duration-300"
       >
         {/* Logo */}
         <div className="flex justify-center mb-8">
           <img
             className="w-24 drop-shadow-lg"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYQy-OIkA6In0fTvVwZADPmFFibjmszu2A0g&s"
+            src="./src/assets/QuickRide_logo_1.jpeg"
             alt="QuickRide Logo"
           />
         </div>
@@ -97,6 +100,33 @@ const UserSignup = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
+          </div>
+
+          <div>
+            <select
+              required
+              className="bg-white/20 mb-7 rounded-xl px-5 py-4 border border-white/20 w-full text-white text-lg placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              style={{ backgroundColor: "rgba(255,255,255,0.2)" }}   // dropdown bg
+            >
+              <option style={{ backgroundColor: "#1f2937" }} value="" disabled>
+                Select Gender
+              </option>
+              <option style={{ backgroundColor: "#1f2937" }} value="male">
+                Male
+              </option>
+              <option style={{ backgroundColor: "#1f2937" }} value="female">
+                Female
+              </option>
+              <option style={{ backgroundColor: "#1f2937" }} value="other">
+                Other
+              </option>
+              <option style={{ backgroundColor: "#1f2937" }} value="prefer_not_say">
+                Prefer not to say
+              </option>
+            </select>
+
           </div>
 
           {/* Email */}

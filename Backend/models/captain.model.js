@@ -29,6 +29,10 @@ const captainSchema = new mongoose.Schema({
     socketId: {
         type: String,
     },
+    gender: {
+        type: String,
+        enum: [ 'male', 'female', 'other', 'prefer_not_say' ],
+    },
 
     status: {
         type: String,
